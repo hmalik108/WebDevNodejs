@@ -13,9 +13,11 @@ var nav = [{
     Link: '/Authors',
     Text: 'Author'
         }];
+
+var bookRouter = require('./src/routes/bookRoutes')(nav);
+
 app.use(express.static('public'));
 app.set('views', './src/views');
-var bookRouter = require('./src/routes/bookRoutes');
 
 app.set('view engine', 'ejs');
 
@@ -26,10 +28,10 @@ app.get('/', function (req, res) {
         title: ' Hello from ejs',
         nav: [{
             Link: '/Books',
-            Text: 'Books'
+            Text: 'Book'
         }, {
             Link: '/Author',
-            Text: 'Authors'
+            Text: 'Author'
         }]
     });
 });
@@ -37,6 +39,7 @@ app.get('/', function (req, res) {
 app.get('/books', function (req, res) {
     res.send('Hello books');
 });
+
 
 app.listen(port, function (err) {
     console.log('magic happens on port' + port);
