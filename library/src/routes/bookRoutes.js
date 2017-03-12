@@ -1,48 +1,31 @@
 var express = require('express');
 
 var bookRouter = express.Router();
+var mongodb = require('mongodb').MongoClient;   
 
-var router = function(nav){
+
+var router = function (nav) {
+
+   
     
-    var books = [
-
-        {
-            title: 'Book Title 1',
-            genre: 'Hstorical',
-            author: 'Adam Dan',
-            read: false
-    },
-        {
-            title: 'Book Title 2',
-            genre: 'Hstorical',
-            author: 'Adam Dan',
-            read: false
-    },
-        {
-            title: 'Book Title 3',
-            genre: 'Hstorical',
-            author: 'Adam Dan',
-            read: false
-    },
-        {
-            title: 'Book Title 4',
-            genre: 'Hstorical',
-            author: 'Adam Dan',
-            read: false
-    }
-
-
-];
-
-
     bookRouter.route('/')
         .get(function (req, res) {
-            res.render('bookListView', {
-                title: 'bookListView',
-                nav: nav,
-                books: books
+            var url = 'mongodb://localhost:27017/libraryApp';
+            mongodb.connect(url, function (err, db) {
+                var collection = db.collection('books');
+                collection.find({}).toArray(function (err, results) {
+                    console.log(results);
+                    res.render('bookListView', {
+                        title: 'bookListView',
+                        nav: nav,
+                        books: results
+                    });
+                    db.close();
+                });
             });
-        });
+
+
+        }); 
 
     bookRouter.route('/:id')
         .get(function (req, res) {
@@ -54,7 +37,7 @@ var router = function(nav){
             });
         });
 
-    return bookRouter;
+    return bookRouter; 
 };
 
 
