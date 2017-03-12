@@ -6,63 +6,12 @@ var bookRouter = express.Router();
 
 app.use(express.static('public'));
 app.set('views', './src/views');
-
+var bookRouter = require('./src/routes/bookRoutes');
 
 //var handlebars = require('express-handlebars');
 //app.engine('.hbs',handlebars({extname: '.hbs'}));
 
 app.set('view engine', 'ejs');
-
-var books = [
-    
-    {
-        title: 'Book Title 1',
-        genre: 'Hstorical',
-        author: 'Adam Dan',
-        read: false
-    },
-    {
-        title: 'Book Title 2',
-        genre: 'Hstorical',
-        author: 'Adam Dan',
-        read: false
-    },
-    {
-        title: 'Book Title 3',
-        genre: 'Hstorical',
-        author: 'Adam Dan',
-        read: false
-    },
-    {
-        title: 'Book Title 4',
-        genre: 'Hstorical',
-        author: 'Adam Dan',
-        read: false
-    }
-    
-    
-]
-
-
-bookRouter.route('/')
-    .get(function (req, res) {
-        res.render('books', {
-            title: ' Hello from ejs',
-            nav: [{
-                Link: '/Books',
-                Text: 'Books'
-        }, {
-                Link: '/Author',
-                Text: 'Authors'
-        }],
-            books: books
-        });
-    });
-
-bookRouter.route('/single')
-    .get(function (req, res) {
-        res.send("Hello Single Books");
-    });
 
 app.use('/', bookRouter);
 
