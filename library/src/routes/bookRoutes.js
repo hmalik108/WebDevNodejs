@@ -3,8 +3,10 @@ var express = require('express');
 var bookRouter = express.Router();
 
 
+
+
 var books = [
-    
+
     {
         title: 'Book Title 1',
         genre: 'Hstorical',
@@ -29,8 +31,8 @@ var books = [
         author: 'Adam Dan',
         read: false
     }
-    
-    
+
+
 ]
 
 
@@ -49,10 +51,9 @@ bookRouter.route('/')
         });
     });
 
-bookRouter.route('/books/:id')
+bookRouter.route('/:id')
     .get(function (req, res) {
         var id = req.params.id;
-        
         res.render('bookView', {
             title: ' Hello from ejs',
             nav: [{
