@@ -25,13 +25,19 @@ var router = function () {
         });
     authRouter.route('/signIn')
         .post(passport.authenticate('local', {
-            
+
             failureRedirect: '/'
         }), function (req, res) {
-        console.log('got true'); 
+            console.log('got true');
             res.redirect('/auth/profile');
         });
     authRouter.route('/profile')
+        .all(function (req, res, next) {
+            if (!req.user) {
+                res.redirect('/');
+            }
+            next();
+        })
         .get(function (req, res) {
             res.json(req.user);
         });
