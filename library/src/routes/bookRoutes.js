@@ -6,8 +6,12 @@ var objectId = require('mongodb').ObjectId;
 
 
 var router = function (nav) {
-
-   
+    
+    bookRouter.use(function(req,res,next){
+        if(!req.user)
+            res.redirect('/');
+        next();
+    });
     
     bookRouter.route('/')
         .get(function (req, res) {
@@ -21,7 +25,7 @@ var router = function (nav) {
                         nav: nav,
                         books: results
                     });
-                    db.close();
+                    db.close(); 
                 });
             });
 
