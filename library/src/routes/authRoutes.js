@@ -25,8 +25,10 @@ var router = function () {
         });
     authRouter.route('/signIn')
         .post(passport.authenticate('local', {
+            
             failureRedirect: '/'
         }), function (req, res) {
+        console.log('got true'); 
             res.redirect('/auth/profile');
         });
     authRouter.route('/profile')
