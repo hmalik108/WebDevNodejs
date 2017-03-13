@@ -27,8 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(session({secret: 'library'}));
-//app.use(passport.initilize());
-//app.use(passport.session());
+
 require('./src/config/passport')(app);
 
 
