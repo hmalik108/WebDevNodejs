@@ -10,7 +10,7 @@ var goodReadServices = function () {
 
         var options = {
             host: 'www.goodreads.com',
-            path: '/book/show/50.xml?key=qUkjU0w97NrBCmRcjnR2Jw'
+            path: '/book/show/'+ id +'.xml?key=qUkjU0w97NrBCmRcjnR2Jw'
 
         };
 

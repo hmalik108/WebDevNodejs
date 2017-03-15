@@ -36,18 +36,25 @@ var bookController = function (bookService, nav) {
             collection.findOne({
                 _id: id
             }, function (err, results) {
-                //console.log(results);
-                
-                bookService.getBookById(results.bookId, function (err, book) {
-                    results.book = book;
-                    //console.log(book.GoodreadsResponse.book['description']);
-                    //console.log(results);
+                if (results.bookId) {
+                    bookService.getBookById(results.bookId, function (err, book) {
+                        results.book = book;
+                        //console.log(book.GoodreadsResponse.book['description']);
+                        //console.log(results);
+                        res.render('bookView', {
+                            title: 'bookView',
+                            nav: nav,
+                            book: results
+                        });
+                    });
+                } else {
                     res.render('bookView', {
                         title: 'bookView',
                         nav: nav,
-                        book: results 
+                        book: results
                     });
-                });
+                }
+
 
 
                 db.close();
@@ -61,7 +68,7 @@ var bookController = function (bookService, nav) {
     };
 
 
-}; 
+};
 
 
 module.exports = bookController;

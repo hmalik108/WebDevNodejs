@@ -9,12 +9,14 @@ var books = [
         title: 'Scion of Ikshvaku',
         genre: 'Mythological',
         author: 'Amish Tripathi',
+        bookId: 24709327,
         read: false
     },
     {
         title: 'Norse Mythology',
         genre: 'Fiction',
         author: 'Neil Gaiman',
+        bookId: 30831912,
         read: false
     },
     {
