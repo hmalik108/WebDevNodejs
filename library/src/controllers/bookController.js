@@ -5,9 +5,9 @@ var objectId = require('mongodb').ObjectId;
 //Revealing model pattern
 var bookController = function (bookService, nav) {
 
-    var middleware = function(req,res,next){
+    var middleware = function (req, res, next) {
         // if(!req.user)
-         //   res.redirect('/');
+        //   res.redirect('/');
         next();
     };
     var getIndex = function (req, res) {
@@ -37,11 +37,19 @@ var bookController = function (bookService, nav) {
                 _id: id
             }, function (err, results) {
                 //console.log(results);
-                res.render('bookView', {
-                    title: 'bookView',
-                    nav: nav,
-                    book: results
+                
+                bookService.getBookById(results.bookId, function (err, book) {
+                    results.book = book;
+                    //console.log(book.GoodreadsResponse.book['description']);
+                    //console.log(results);
+                    res.render('bookView', {
+                        title: 'bookView',
+                        nav: nav,
+                        book: results 
+                    });
                 });
+
+
                 db.close();
             });
         });
@@ -49,11 +57,11 @@ var bookController = function (bookService, nav) {
     return {
         getIndex: getIndex,
         getById: getById,
-        middleware: middleware 
+        middleware: middleware
     };
 
 
-};
+}; 
 
 
 module.exports = bookController;
